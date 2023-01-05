@@ -1,0 +1,31 @@
+<h1>Draggable hell</h1>
+<div class="item-container" cdkDropListGroup>
+  <div
+    cdkDropList
+    (cdkDropListDropped)="dropListDropped()"
+    (cdkDropListEntered)="cdkDropListEntered($event)"
+  ></div>
+  <ng-container *ngFor="let item of items; trackBy: itemTrackBy">
+    <div
+      cdkDropList
+      *ngIf="item === 3; else other"
+      (cdkDropListDropped)="dropListDropped()"
+      (cdkDropListEntered)="cdkDropListEntered($event)"
+    >
+      <div cdkDrag class="example-box-wide">
+        {{ item }}
+      </div>
+    </div>
+    <ng-template #other>
+      <div
+        cdkDropList
+        (cdkDropListDropped)="dropListDropped()"
+        (cdkDropListEntered)="cdkDropListEntered($event)"
+      >
+        <div cdkDrag class="example-box">
+          {{ item }}
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+</div>
